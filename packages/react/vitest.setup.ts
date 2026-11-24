@@ -1,1 +1,0 @@
-Error.stackTraceLimit = 100

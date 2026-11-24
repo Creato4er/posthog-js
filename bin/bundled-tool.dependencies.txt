@@ -1,0 +1,2 @@
+# Embedded dependency inventory for bin/bundled-tool
+miniz 3.0.2 (MIT)

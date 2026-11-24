@@ -1,4 +1,0 @@
-// Mock for @vercel/functions in test environment
-// Auto-detection in clientCache.ts dynamically imports this module.
-// In tests, we control it via vi.mock().
-export const waitUntil = undefined

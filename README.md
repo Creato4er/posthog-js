@@ -1,38 +1,29 @@
-<p align="center">
-  <img alt="posthoglogo" src="https://user-images.githubusercontent.com/65415371/205059737-c8a4f836-4889-4654-902e-f302b187b6a0.png">
-</p>
-<p align="center">
-  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/posthog/posthog"/>
-  <a href='http://makeapullrequest.com'><img alt='PRs Welcome' src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields'/></a>
-  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/posthog/posthog-js"/>
-  <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/posthog/posthog-js"/>
-</p>
+# Dependency Fixture
 
-# PostHog JS
+A minimal Node.js app for scanning four dependency acquisition patterns.
 
-This is a monorepo containing multiple packages to integrate with PostHog using JavaScript!
+## Run
 
-Please see the main [PostHog docs](https://posthog.com/docs).
+Requires Node.js 22+ and npm.
 
-## Packages
+```sh
+npm install
+npm start
+```
 
-- [posthog-js](./packages/browser/README.md)
-- [posthog-js-lite](./packages/web/README.md)
-- [posthog-node](./packages/node/README.md)
-- [posthog-docusaurus](./packages/docusaurus/README.md)
-- [posthog-react-native](./packages/react-native/README.md)
-- [@posthog/react](./packages/react/README.md)
-- [@posthog/ai](./packages/ai/README.md)
-- [@posthog/convex](./packages/convex/README.md)
-- [@posthog/nextjs-config](./packages/nextjs-config/README.md)
-- [@posthog/nuxt](./packages/nuxt/README.md)
-- [@posthog/openfeature-node-provider](./packages/openfeature-node-provider/README.md)
-- [@posthog/openfeature-web-provider](./packages/openfeature-web-provider/README.md)
-- [@posthog/plugin-utils](./packages/plugin-utils/README.md)
-- [@posthog/rollup-plugin](./packages/rollup-plugin/README.md)
-- [@posthog/types](./packages/types/README.md)
-- [@posthog/webpack-plugin](./packages/webpack-plugin/README.md)
+## Dependency examples
 
-## Contributing
+1. **Runtime download:** `runtime-fetch.mjs` fetches pinned `left-pad@1.3.0` directly from esm.sh and imports it without adding it to `package.json`.
+   ```sh
+   node runtime-fetch.mjs
+   ```
+2. **External library from an install script:** `scripts/install-external.sh` downloads the pinned `is-number@7.0.0` npm tarball with curl and extracts it outside `node_modules`.
+   ```sh
+   npm run install:external
+   ```
+3. **System-level dependencies:** `Dockerfile` installs Debian packages `ca-certificates` and `curl`; `os-packages.txt` lists them separately from npm packages.
+4. **Dependencies embedded in a precompiled binary:** `bin/bundled-tool` is a checked-in precompiled executable with embedded `miniz@3.0.2`; its binary inventory is in `bin/bundled-tool.dependencies.txt` and `bin/NOTICE.md`.
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md)
+The normal app uses one direct npm dependency, `kleur@4.1.5`. Its transitive dependency graph is recorded by `package-lock.json`. The extra acquisition examples are opt-in, so `npm install` and `npm start` stay simple.
+
+This is a dependency-scanning fixture, not a production app. Runtime downloads and installer downloads require network access when explicitly run.

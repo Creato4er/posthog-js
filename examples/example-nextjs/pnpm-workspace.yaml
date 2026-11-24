@@ -1,9 +1,0 @@
-pnpmfile: ../.pnpmfile.cjs
-nodeLinker: 'hoisted'
-minimumReleaseAge: 10080
-
-overrides:
-    fastq: 1.19.1
-
-blockExoticSubdeps: true
-trustPolicy: no-downgrade

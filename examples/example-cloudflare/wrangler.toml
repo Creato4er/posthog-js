@@ -1,6 +1,0 @@
-name = "example-cloudflare"
-main = "src/index.ts"
-compatibility_date = "2025-11-19"
-
-[vars]
-POSTHOG_API_HOST = "https://us.i.posthog.com"

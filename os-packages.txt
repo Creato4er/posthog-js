@@ -1,0 +1,3 @@
+# System-level dependencies (Debian/Ubuntu package names)
+ca-certificates
+curl
